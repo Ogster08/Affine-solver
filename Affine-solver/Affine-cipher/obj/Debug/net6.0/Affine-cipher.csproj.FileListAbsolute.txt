@@ -1,0 +1,15 @@
+C:\Users\olive\Documents\GitHub\Affine-solver\Affine-solver\Affine-cipher\bin\Debug\net6.0\Affine-cipher.exe
+C:\Users\olive\Documents\GitHub\Affine-solver\Affine-solver\Affine-cipher\bin\Debug\net6.0\Affine-cipher.deps.json
+C:\Users\olive\Documents\GitHub\Affine-solver\Affine-solver\Affine-cipher\bin\Debug\net6.0\Affine-cipher.runtimeconfig.json
+C:\Users\olive\Documents\GitHub\Affine-solver\Affine-solver\Affine-cipher\bin\Debug\net6.0\Affine-cipher.dll
+C:\Users\olive\Documents\GitHub\Affine-solver\Affine-solver\Affine-cipher\bin\Debug\net6.0\Affine-cipher.pdb
+C:\Users\olive\Documents\GitHub\Affine-solver\Affine-solver\Affine-cipher\obj\Debug\net6.0\Affine-cipher.csproj.AssemblyReference.cache
+C:\Users\olive\Documents\GitHub\Affine-solver\Affine-solver\Affine-cipher\obj\Debug\net6.0\Affine-cipher.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\olive\Documents\GitHub\Affine-solver\Affine-solver\Affine-cipher\obj\Debug\net6.0\Affine-cipher.AssemblyInfoInputs.cache
+C:\Users\olive\Documents\GitHub\Affine-solver\Affine-solver\Affine-cipher\obj\Debug\net6.0\Affine-cipher.AssemblyInfo.cs
+C:\Users\olive\Documents\GitHub\Affine-solver\Affine-solver\Affine-cipher\obj\Debug\net6.0\Affine-cipher.csproj.CoreCompileInputs.cache
+C:\Users\olive\Documents\GitHub\Affine-solver\Affine-solver\Affine-cipher\obj\Debug\net6.0\Affine-cipher.dll
+C:\Users\olive\Documents\GitHub\Affine-solver\Affine-solver\Affine-cipher\obj\Debug\net6.0\refint\Affine-cipher.dll
+C:\Users\olive\Documents\GitHub\Affine-solver\Affine-solver\Affine-cipher\obj\Debug\net6.0\Affine-cipher.pdb
+C:\Users\olive\Documents\GitHub\Affine-solver\Affine-solver\Affine-cipher\obj\Debug\net6.0\Affine-cipher.genruntimeconfig.cache
+C:\Users\olive\Documents\GitHub\Affine-solver\Affine-solver\Affine-cipher\obj\Debug\net6.0\ref\Affine-cipher.dll
