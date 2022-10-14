@@ -33,21 +33,23 @@
             {
                 for (int y = 0; y <= 25; y++)
                 {
-                    List<string> decryption = new();
+                    List<string> decrypted = new();
                     foreach (char letter in lettersText)
                     {
                         int letterNumber = Convert.ToInt32(letter - 97) % 26;
-                        int numberDecryption = letterNumber * x + y;
-                        decryption.Add(Convert.ToChar(numberDecryption + 97).ToString());
+                        int numberDecryped = letterNumber * x + y;
+                        decrypted.Add(Convert.ToChar(numberDecrypted + 97).ToString());
                     }
 
-                    possibleDecryptions.Add(string.Join("", decryption));
+                    possibleDecryptions.Add(string.Join("", decrypted));
                 }
             }
             double[] scores = new double[possibleDecryptions.Count];
+            foreach (var (item, index) in possibleDecryptions.WithIndex()){scores[index] = ChiSquareTest(item);}
+            string decryption = possibleDecryptions[Array.IndexOf(scores, scores.Max())];
 
             List<string> output = new List<string>();
-            foreach (char letter in lettersText) { output.Add(letter.ToString()); }
+            foreach (char letter in decryption) { output.Add(letter.ToString()); }
             foreach (var item in nonLetters) { output.Insert(Convert.ToInt32(item[1]), item[0].ToString()); }
 
             Console.WriteLine(string.Join("", output));
@@ -78,5 +80,4 @@
             return score;
         }
     }
-
-    }
+}
