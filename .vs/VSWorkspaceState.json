@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Affine-solver"
+    "\\Affine-solver",
+    "\\Affine-solver\\Affine-cipher"
   ],
-  "SelectedNode": "\\Affine-solver\\Affine-cipher.sln",
+  "SelectedNode": "\\Affine-solver\\Affine-cipher\\Program.cs",
   "PreviewInSolutionExplorer": false
 }
