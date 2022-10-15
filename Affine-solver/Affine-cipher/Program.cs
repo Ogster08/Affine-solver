@@ -29,7 +29,7 @@
                 }
             }
 
-            List<string> possibleDecryptions = new();
+            List<string[]> possibleDecryptions = new();
             for (int x = 1; x <= 25; x += 2)
             {
                 for (int y = 0; y <= 25; y++)
@@ -40,15 +40,11 @@
                     {
                         flag = (x * i) % 26;
 
-                        // Check if (a*i)%26 == 1,
-                        // then i will be the multiplicative inverse of a
                         if (flag == 1)
                         {
                             x_inv = i;
                         }
                     }
-
-                    Console.WriteLine((y, x_inv).ToString());
 
                     List<string> decrypted = new();
                     foreach (char letter in lettersText)
@@ -56,26 +52,23 @@
                         int letterNumber = Convert.ToInt32(letter - 97) % 26;
                         int numberDecrypted = ((letterNumber - y) * x_inv) % 26;
                         while (numberDecrypted < 0) { numberDecrypted += 26; }
-                        //Console.WriteLine(numberDecrypted.ToString());
                         decrypted.Add(Convert.ToChar(numberDecrypted + 97).ToString());
                     }
-
-                    possibleDecryptions.Add(string.Join("", decrypted));
+                    string[] ToAdd = { string.Join("", decrypted), $"{x}, {y}"};
+                    possibleDecryptions.Add(ToAdd);
                 }
             }
             double[] scores = new double[possibleDecryptions.Count];
-            for (int i = 0; i < possibleDecryptions.Count(); i++) {scores[i] = ChiSquareTest(possibleDecryptions[i]);}
-            string decryption = possibleDecryptions[Array.IndexOf(scores, scores.Max())];
+            for (int i = 0; i < possibleDecryptions.Count(); i++) {scores[i] = ChiSquareTest(possibleDecryptions[i][0]);}
+            string[] decryption = possibleDecryptions[Array.IndexOf(scores, scores.Min())];
 
             List<string> output = new List<string>();
-            foreach (char letter in decryption) { output.Add(letter.ToString()); }
+            foreach (char letter in decryption[0]) { output.Add(letter.ToString()); }
             foreach (var item in nonLetters) { output.Insert(Convert.ToInt32(item[1]), item[0].ToString()); }
 
-            Array.Sort(scores);
             Console.WriteLine();
             Console.WriteLine(string.Join("", output));
-            Console.WriteLine(string.Join(",", scores));
-            Console.WriteLine(string.Join("", possibleDecryptions[32]));
+            Console.WriteLine(decryption[1]);
         }
 
         public static Dictionary<string, int> TextFrequency(string testText)
