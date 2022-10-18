@@ -9,66 +9,67 @@
     {
         static void Main(string[] args)
         {
-            string text = "";
-            string lettersText = "";
-            while (lettersText.Length < 200)
+            while (true)
             {
-                Console.Write("Enter encrypted text (at least 200 characters long): ");
-                text = Console.ReadLine().ToLower();
-                lettersText = string.Join("", text.Where(char.IsLetter).ToArray());
-            }
-
-            List<string[]> nonLetters = new();
-
-            for (int i = 0; i < text.Length; i++)
-            {
-                if (!char.IsLetter(text[i]))
+                string text = "";
+                string lettersText = "";
+                while (lettersText.Length < 200)
                 {
-                    string[] nonLetterIndex = { text[i].ToString(), i.ToString() };
-                    nonLetters.Add(nonLetterIndex);
+                    Console.Write("Enter encrypted text (at least 200 characters long): ");
+                    text = Console.ReadLine().ToLower();
+                    lettersText = string.Join("", text.Where(char.IsLetter).ToArray());
                 }
-            }
 
-            List<string[]> possibleDecryptions = new();
-            for (int x = 1; x <= 25; x += 2)
-            {
-                for (int y = 0; y <= 25; y++)
+                List<string[]> nonLetters = new();
+
+                for (int i = 0; i < text.Length; i++)
                 {
-                    int flag = 0;
-                    int x_inv = 0;
-                    for (int i = 0; i < 26; i++)
+                    if (!char.IsLetter(text[i]))
                     {
-                        flag = (x * i) % 26;
+                        string[] nonLetterIndex = { text[i].ToString(), i.ToString() };
+                        nonLetters.Add(nonLetterIndex);
+                    }
+                }
 
-                        if (flag == 1)
+                List<string[]> possibleDecryptions = new();
+                for (int x = 1; x <= 25; x += 2)
+                {
+                    for (int y = 0; y <= 25; y++)
+                    {
+                        int x_inv = 0;
+                        for (int i = 0; i < 26; i++)
                         {
-                            x_inv = i;
+
+                            if (x * i % 26 == 1)
+                            {
+                                x_inv = i;
+                            }
                         }
-                    }
 
-                    List<string> decrypted = new();
-                    foreach (char letter in lettersText)
-                    {
-                        int letterNumber = Convert.ToInt32(letter - 97) % 26;
-                        int numberDecrypted = ((letterNumber - y) * x_inv) % 26;
-                        while (numberDecrypted < 0) { numberDecrypted += 26; }
-                        decrypted.Add(Convert.ToChar(numberDecrypted + 97).ToString());
+                        List<string> decrypted = new();
+                        foreach (char letter in lettersText)
+                        {
+                            int letterNumber = Convert.ToInt32(letter - 97) % 26;
+                            int numberDecrypted = ((letterNumber - y) * x_inv) % 26;
+                            while (numberDecrypted < 0) { numberDecrypted += 26; }
+                            decrypted.Add(Convert.ToChar(numberDecrypted + 97).ToString());
+                        }
+                        string[] ToAdd = { string.Join("", decrypted), $"{x}, {y}" };
+                        possibleDecryptions.Add(ToAdd);
                     }
-                    string[] ToAdd = { string.Join("", decrypted), $"{x}, {y}"};
-                    possibleDecryptions.Add(ToAdd);
                 }
+                double[] scores = new double[possibleDecryptions.Count];
+                for (int i = 0; i < possibleDecryptions.Count(); i++) { scores[i] = ChiSquareTest(possibleDecryptions[i][0]); }
+                string[] decryption = possibleDecryptions[Array.IndexOf(scores, scores.Min())];
+
+                List<string> output = new List<string>();
+                foreach (char letter in decryption[0]) { output.Add(letter.ToString()); }
+                foreach (var item in nonLetters) { output.Insert(Convert.ToInt32(item[1]), item[0].ToString()); }
+
+                Console.WriteLine();
+                Console.WriteLine(string.Join("", output));
+                Console.WriteLine(decryption[1]);
             }
-            double[] scores = new double[possibleDecryptions.Count];
-            for (int i = 0; i < possibleDecryptions.Count(); i++) {scores[i] = ChiSquareTest(possibleDecryptions[i][0]);}
-            string[] decryption = possibleDecryptions[Array.IndexOf(scores, scores.Min())];
-
-            List<string> output = new List<string>();
-            foreach (char letter in decryption[0]) { output.Add(letter.ToString()); }
-            foreach (var item in nonLetters) { output.Insert(Convert.ToInt32(item[1]), item[0].ToString()); }
-
-            Console.WriteLine();
-            Console.WriteLine(string.Join("", output));
-            Console.WriteLine(decryption[1]);
         }
 
         public static Dictionary<string, int> TextFrequency(string testText)
